@@ -81,7 +81,7 @@ const Customers = () => {
         <Loader mt={5} />
       ) : isError ? (
         <Alert
-          variant='outline'
+          variant='outlined'
           mt={4}
           message={'An error ocurred. Please try again later.'}
         />
