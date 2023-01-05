@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 // import User from '../models/User.js';
-// import { dataUser } from '../data/index.js';
+// import Product from '../models/Product.js';
+// import ProductStat from '../models/ProductStat.js';
+// import { dataUser, dataProduct, dataProductStat } from '../data/index.js';
 
 const connectDB = async () => {
   const URI = process.env.DB_CONNECTION_STRING;
@@ -17,6 +19,8 @@ const connectDB = async () => {
 
     /* INSERT ONLY FOR 1ST TIME WHEN SETTING UP DEV SERVER */
     // User.insertMany(dataUser);
+    // Product.insertMany(dataProduct);
+    // ProductStat.insertMany(dataProductStat);
   } catch (error) {
     console.log('CONNECTION FAILED TO DB!');
     console.log(error);
