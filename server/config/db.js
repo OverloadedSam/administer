@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-// import User from '../models/User.js';
-// import Product from '../models/Product.js';
-// import ProductStat from '../models/ProductStat.js';
+import User from '../models/User.js';
+import Product from '../models/Product.js';
+import ProductStat from '../models/ProductStat.js';
 // import { dataUser, dataProduct, dataProductStat } from '../data/index.js';
 
 const connectDB = async () => {
