@@ -1,5 +1,7 @@
+import mongoose from 'mongoose';
 import User from '../models/User.js';
 import ProductStat from '../models/ProductStat.js';
+import Transaction from '../models/Transaction.js';
 import asyncHandler from '../middlewares/asyncHandler.js';
 
 export const getProducts = asyncHandler(async (req, res, next) => {
@@ -19,5 +21,52 @@ export const getCustomers = asyncHandler(async (req, res, next) => {
     success: true,
     status: 200,
     data: users,
+  });
+});
+
+export const getTransactions = asyncHandler(async (req, res, next) => {
+  const { page = 1, pageSize = 20, sort = null, search = '' } = req.query;
+  console.log({ page, pageSize, sort, search });
+
+  const generateSort = (sort) => {
+    if (!Boolean(sort)) return {};
+
+    const sortParsed = JSON.parse(sort);
+    const sortFormatted = {
+      [sortParsed.field]: sortParsed.sort == 'asc' ? 1 : -1,
+    };
+
+    return sortFormatted;
+  };
+  const sortFormatted = generateSort(sort);
+
+  // Make search objects for _id and userId field which are of type ObjectId.
+  const matchMongooseIds = [];
+  if (mongoose.isValidObjectId(search)) {
+    matchMongooseIds.push({ _id: search });
+    matchMongooseIds.push({ userId: search });
+  }
+
+  const transactions = await Transaction.find({
+    $or: [{ cost: { $regex: new RegExp(search, 'i') } }, ...matchMongooseIds],
+  })
+    .skip(Math.abs(page) * pageSize)
+    .limit(pageSize)
+    .sort(sortFormatted)
+    .collation({ locale: 'en_US', numericOrdering: true });
+
+  const total = await Transaction.countDocuments({
+    $or: [{ cost: { $regex: new RegExp(search, 'i') } }, ...matchMongooseIds],
+  });
+
+  res.status(200).json({
+    success: true,
+    status: 200,
+    data: {
+      page: Math.abs(page),
+      count: transactions.length,
+      total,
+      transactions,
+    },
   });
 });
