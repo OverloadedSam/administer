@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Rating from '@mui/material/Rating';
 import Loader from '../../components/Loader';
+import Alert from '../../components/Alert';
 import Header from '../../components/Header';
 import { useGetProductsQuery } from '../../state/apiSlice';
 
@@ -78,12 +79,12 @@ const Product = (props) => {
 };
 
 const Products = () => {
-  const { data, isLoading } = useGetProductsQuery();
+  const { data, isLoading, isError, error } = useGetProductsQuery();
   const isNonMobile = useMediaQuery('(min-width: 600px)');
   return (
     <Box m='1.5rem 2.5rem'>
       <Header title='Products' subtitle='See your list of products' />
-      {data || !isLoading ? (
+      {data ? (
         <Box
           mt='20px'
           display='grid'
@@ -107,9 +108,11 @@ const Products = () => {
             );
           })}
         </Box>
-      ) : (
+      ) : isLoading ? (
         <Loader mt={5} />
-      )}
+      ) : isError ? (
+        <Alert mt={4} message={'An error ocurred. Please try again later.'} />
+      ) : null}
     </Box>
   );
 };
