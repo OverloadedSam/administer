@@ -8,15 +8,15 @@ const ProductSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      require: [true, 'Price is required!'],
+      required: [true, 'Price is required!'],
     },
     description: {
       type: String,
-      require: [true, 'Description is required!'],
+      required: [true, 'Description is required!'],
     },
     category: {
       type: String,
-      require: [true, 'Category is required!'],
+      required: [true, 'Category is required!'],
     },
     rating: {
       type: Number,

@@ -5,6 +5,7 @@ const ProductStatSchema = new mongoose.Schema(
     productId: {
       type: mongoose.Schema.ObjectId,
       ref: 'Product',
+      required: [true, 'Product is required!']
     },
     yearlySalesTotal: {
       type: Number,
