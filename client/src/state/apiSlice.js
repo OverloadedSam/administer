@@ -12,20 +12,24 @@ export const apiSlice = createApi({
     'Sales',
     'Admins',
     'Performance',
+    'Dashboard',
   ],
   endpoints: (build) => ({
     getUser: build.query({
       query: (id) => `general/user/${id}`,
       providesTags: ['User'],
     }),
+
     getProducts: build.query({
       query: () => 'client/products',
       providesTags: ['Products'],
     }),
+
     getCustomers: build.query({
       query: () => 'client/customers',
       providesTags: ['Customers'],
     }),
+
     getTransactions: build.query({
       query: (urlParams) => ({
         url: 'client/transactions',
@@ -34,21 +38,30 @@ export const apiSlice = createApi({
       }),
       providesTags: ['Transactions'],
     }),
+
     getGeography: build.query({
       query: () => 'client/geography',
       providesTags: ['Geography'],
     }),
+
     getSales: build.query({
       query: () => 'sales/sales',
       providesTags: ['Sales'],
     }),
+
     getAdmins: build.query({
       query: () => 'management/admins',
       providesTags: ['Admins'],
     }),
+
     getUserPerformance: build.query({
       query: (userId) => `management/performance/${userId}`,
       providesTags: ['Performance'],
+    }),
+
+    getDashboardData: build.query({
+      query: () => 'general/dashboard',
+      providesTags: ['Dashboard'],
     }),
   }),
 });
@@ -62,4 +75,5 @@ export const {
   useGetSalesQuery,
   useGetAdminsQuery,
   useGetUserPerformanceQuery,
+  useGetDashboardDataQuery,
 } = apiSlice;
