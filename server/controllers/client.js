@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import getCountryIso3 from 'country-iso-2-to-3';
 import User from '../models/User.js';
 import ProductStat from '../models/ProductStat.js';
 import Transaction from '../models/Transaction.js';
@@ -68,5 +69,28 @@ export const getTransactions = asyncHandler(async (req, res, next) => {
       total,
       transactions,
     },
+  });
+});
+
+export const getGeography = asyncHandler(async (req, res, next) => {
+  const users = await User.find().select('_id name country');
+
+  let mappedLocations = users.reduce((acc, { country }) => {
+    const countryISO3 = getCountryIso3(country);
+    if (!acc[countryISO3]) acc[countryISO3] = 0;
+    acc[countryISO3]++;
+
+    return acc;
+  }, {});
+
+  const formattedLocations = Object.keys(mappedLocations).map((key) => ({
+    id: key,
+    value: mappedLocations[key],
+  }));
+
+  res.status(200).json({
+    success: true,
+    status: 200,
+    data: formattedLocations,
   });
 });
