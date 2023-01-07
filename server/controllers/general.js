@@ -3,6 +3,12 @@ import OverallStat from '../models/OverallStat.js';
 import Transaction from '../models/Transaction.js';
 import asyncHandler from '../middlewares/asyncHandler.js';
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /user/:id
+ * @ACCESS  Public
+ * @PARAMS  req.params.id - The valid User id (MongoDB).
+ * @DESC    Get user details. */
 export const getUser = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findById(id);
@@ -14,6 +20,11 @@ export const getUser = asyncHandler(async (req, res, next) => {
   });
 });
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /dashboard
+ * @ACCESS  Public
+ * @DESC    Get data essential for Dashboard. */
 export const getDashboardStats = asyncHandler(async (req, res, next) => {
   // Hardcoded values due to limited data availability.
   const currentMonth = 'November';

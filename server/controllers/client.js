@@ -5,6 +5,11 @@ import ProductStat from '../models/ProductStat.js';
 import Transaction from '../models/Transaction.js';
 import asyncHandler from '../middlewares/asyncHandler.js';
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /products
+ * @ACCESS  Public
+ * @DESC    Get list of products with stat. */
 export const getProducts = asyncHandler(async (req, res, next) => {
   const productsWithStats = await ProductStat.find().populate('productId');
 
@@ -15,6 +20,11 @@ export const getProducts = asyncHandler(async (req, res, next) => {
   });
 });
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /customers
+ * @ACCESS  Public
+ * @DESC    Get list of customers. */
 export const getCustomers = asyncHandler(async (req, res, next) => {
   const users = await User.find({ role: 'user' }).select('-password');
 
@@ -25,9 +35,13 @@ export const getCustomers = asyncHandler(async (req, res, next) => {
   });
 });
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /transactions
+ * @ACCESS  Public
+ * @DESC    Get list of transaction (in paginated form). */
 export const getTransactions = asyncHandler(async (req, res, next) => {
   const { page = 1, pageSize = 20, sort = null, search = '' } = req.query;
-  console.log({ page, pageSize, sort, search });
 
   const generateSort = (sort) => {
     if (!Boolean(sort)) return {};
@@ -72,6 +86,11 @@ export const getTransactions = asyncHandler(async (req, res, next) => {
   });
 });
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /geography
+ * @ACCESS  Public
+ * @DESC    Get geographical data of user. */
 export const getGeography = asyncHandler(async (req, res, next) => {
   const users = await User.find().select('_id name country');
 

@@ -3,6 +3,11 @@ import User from '../models/User.js';
 import Transaction from '../models/Transaction.js';
 import asyncHandler from '../middlewares/asyncHandler.js';
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /admins
+ * @ACCESS  Public
+ * @DESC    Get list of Admins and Super-Admins. */
 export const getAdmins = asyncHandler(async (req, res, next) => {
   const admins = await User.find({
     role: { $in: ['admin', 'superadmin'] },
@@ -16,6 +21,12 @@ export const getAdmins = asyncHandler(async (req, res, next) => {
   });
 });
 
+/*
+ * @METHOD  GET
+ * @ROUTE   /performance/:id
+ * @ACCESS  Public
+ * @PARAMS  req.params.id - The valid User id (MongoDB).
+ * @DESC    Get affiliate sales performance by user. */
 export const getPerformanceByUser = asyncHandler(async (req, res, next) => {
   const { id } = req.params;
 
@@ -31,8 +42,6 @@ export const getPerformanceByUser = asyncHandler(async (req, res, next) => {
     },
     { $unwind: '$affiliateStats' },
   ]);
-
-  console.log(userWithStats);
 
   const saleTransactions = await Promise.all(
     userWithStats[0].affiliateStats.affiliateSales.map((id) => {
