@@ -55,7 +55,10 @@ const Admin = () => {
 
   return (
     <Box m='1.5rem 2.5rem'>
-      <Header title='Admins' subtitle='Managing admins and list of admins' />
+      <Header
+        title='ADMINS'
+        subtitle='Manage list of Admins and Super-Admins'
+      />
       {data ? (
         <Box
           mt={3}

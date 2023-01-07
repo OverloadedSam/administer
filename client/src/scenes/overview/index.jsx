@@ -13,7 +13,7 @@ const Overview = () => {
   return (
     <Box m='1.5rem 2.5rem'>
       <Header
-        title='Overview'
+        title='OVERVIEW'
         subtitle='Overview of general revenue and profit'
       />
 

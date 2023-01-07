@@ -15,7 +15,7 @@ const Geography = () => {
 
   return (
     <Box m='1.5rem 2.5rem'>
-      <Header title='Geography' subtitle='Find where your users are located' />
+      <Header title='GEOGRAPHY' subtitle='Find where your users are located' />
 
       {data ? (
         <Box

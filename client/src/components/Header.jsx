@@ -12,7 +12,7 @@ const Header = ({ title, subtitle, ...rest }) => {
         component='h1'
         color={theme.palette.secondary[100]}
         fontWeight='bold'
-        sx={{ mx: '5px' }}
+        sx={{ mb: '5px' }}
       >
         {title}
       </Typography>

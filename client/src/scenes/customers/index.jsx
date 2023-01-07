@@ -40,7 +40,7 @@ const Customers = () => {
 
   return (
     <Box m='1.5rem 2.5rem'>
-      <Header title='Customers' subtitle='List of customers' />
+      <Header title='CUSTOMERS' subtitle='List of customers' />
       {data ? (
         <Box
           mt={3}
