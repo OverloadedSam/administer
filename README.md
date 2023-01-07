@@ -50,7 +50,7 @@ Create a `.env` file at `administer/client/` directory and set the following env
 Create a `.env` file at `administer/server/` directory and set the following environment variables.
 
     PORT=8000 // You can set any port number that is available but make sure to correctly include it in client environment variables.
-    DB_NAME=Auctioneer
+    DB_NAME=Administer
     DB_CONNECTION_STRING={your_mongodb_connection_uri}
 
 
