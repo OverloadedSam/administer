@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const settings = localStorage.getItem('settings');
+const settings = JSON.parse(localStorage.getItem('settings'));
+let mode = 'dark';
+if (settings && settings.mode === 'light') mode = 'light';
 
 const initialState = {
-  mode: settings ? settings.mode : 'dark',
+  mode,
   userId: '63701cc1f03239b7f700000e',
 };
 
